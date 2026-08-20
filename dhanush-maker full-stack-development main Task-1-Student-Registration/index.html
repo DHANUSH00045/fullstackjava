@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ============================================================
+         DOCUMENT SETUP
+    ============================================================ -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="StudentHub — Secure student registration and MySQL data storage portal."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b0d12"
+    >
+
+    <title>StudentHub — Student Registration</title>
+
+
+    <!-- ============================================================
+         GOOGLE FONT
+    ============================================================ -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ============================================================
+         STYLESHEET
+    ============================================================ -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ============================================================
+         BACKGROUND
+    ============================================================ -->
+
+    <div
+        class="page-background"
+        aria-hidden="true"
+    ></div>
+
+
+
+    <!-- ============================================================
+         HEADER
+    ============================================================ -->
+
+    <header class="site-header">
+
+        <nav
+            class="navbar"
+            aria-label="Main navigation"
+        >
+
+            <a
+                href="index.html"
+                class="brand"
+                aria-label="StudentHub Home"
+            >
+
+                <span
+                    class="brand-logo"
+                    aria-hidden="true"
+                >
+                    S
+                </span>
+
+                <span class="brand-info">
+
+                    <strong>
+                        StudentHub
+                    </strong>
+
+                    <small>
+                        Registration Portal
+                    </small>
+
+                </span>
+
+            </a>
+
+
+            <div
+                class="system-status"
+                aria-label="System status"
+            >
+
+                <span
+                    class="status-dot"
+                    aria-hidden="true"
+                ></span>
+
+                <span>
+                    System Online
+                </span>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ============================================================
+         MAIN CONTENT
+    ============================================================ -->
+
+    <main>
+
+
+        <!-- ========================================================
+             HERO SECTION
+        ========================================================= -->
+
+        <section class="hero">
+
+            <div class="hero-container">
+
+
+                <div class="hero-content">
+
+                    <p class="eyebrow">
+
+                        FULL STACK DEVELOPMENT
+
+                        <span aria-hidden="true">
+                            ·
+                        </span>
+
+                        TASK 01
+
+                    </p>
+
+
+                    <h1>
+
+                        Student
+
+                        <span>
+                            Registration.
+                        </span>
+
+                    </h1>
+
+
+                    <p class="hero-description">
+
+                        Register student information and securely
+                        store records in a MySQL database through
+                        a Node.js and Express backend.
+
+                    </p>
+
+
+                    <div class="trust-list">
+
+                        <span class="trust-item">
+
+                            <b aria-hidden="true">
+                                ✓
+                            </b>
+
+                            Secure storage
+
+                        </span>
+
+
+                        <span class="trust-item">
+
+                            <b aria-hidden="true">
+                                ✓
+                            </b>
+
+                            MySQL
+
+                        </span>
+
+
+                        <span class="trust-item">
+
+                            <b aria-hidden="true">
+                                ✓
+                            </b>
+
+                            Express API
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     DATABASE STATUS
+                ================================================== -->
+
+                <div class="hero-status">
+
+                    <span class="status-label">
+                        DATABASE
+                    </span>
+
+                    <strong>
+                        MySQL
+                    </strong>
+
+
+                    <span
+                        class="status-line"
+                        aria-hidden="true"
+                    ></span>
+
+
+                    <span class="status-label">
+                        STATUS
+                    </span>
+
+                    <strong class="online">
+                        Operational
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================================
+             REGISTRATION SECTION
+        ========================================================= -->
+
+        <section
+            class="registration-section"
+            aria-labelledby="registration-title"
+        >
+
+            <div class="registration-container">
+
+
+                <!-- ==================================================
+                     INFORMATION PANEL
+                ================================================== -->
+
+                <aside class="registration-info">
+
+                    <span class="step-number">
+                        01
+                    </span>
+
+
+                    <p class="section-eyebrow">
+                        STUDENT INFORMATION
+                    </p>
+
+
+                    <h2 id="registration-title">
+
+                        Create a
+
+                        <span>
+                            student record.
+                        </span>
+
+                    </h2>
+
+
+                    <p class="info-description">
+
+                        Enter the required information to create
+                        a new student record. The data is validated
+                        before being stored in MySQL.
+
+                    </p>
+
+
+
+                    <!-- ==================================================
+                         PROCESS STEPS
+                    ================================================== -->
+
+                    <div class="process">
+
+
+                        <div class="process-step active">
+
+                            <span>
+                                01
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Enter details
+                                </strong>
+
+                                <small>
+                                    Student information
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="process-step">
+
+                            <span>
+                                02
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Validate
+                                </strong>
+
+                                <small>
+                                    Check submitted data
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="process-step">
+
+                            <span>
+                                03
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Store securely
+                                </strong>
+
+                                <small>
+                                    Save to MySQL
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+
+
+                <!-- ==================================================
+                     REGISTRATION CARD
+                ================================================== -->
+
+                <div class="registration-card">
+
+
+                    <!-- ==================================================
+                         CARD HEADER
+                    ================================================== -->
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="card-label">
+                                NEW RECORD
+                            </span>
+
+                            <h3>
+                                Student details
+                            </h3>
+
+                        </div>
+
+
+                        <span class="required-label">
+
+                            <b>
+                                *
+                            </b>
+
+                            Required
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- ==================================================
+                         REGISTRATION FORM
+                    ================================================== -->
+
+                    <form
+                        id="studentForm"
+                        novalidate
+                    >
+
+                        <div class="form-grid">
+
+
+                            <!-- ==================================================
+                                 FULL NAME
+                            ================================================== -->
+
+                            <div class="form-group full-width">
+
+                                <label for="name">
+
+                                    Full Name
+
+                                    <span>
+                                        *
+                                    </span>
+
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="e.g. Hithesh Kumar"
+                                    autocomplete="name"
+                                    maxlength="100"
+                                    required
+                                >
+
+
+                                <small class="field-hint">
+                                    Enter the student's full name.
+                                </small>
+
+                            </div>
+
+
+
+                            <!-- ==================================================
+                                 EMAIL
+                            ================================================== -->
+
+                            <div class="form-group">
+
+                                <label for="email">
+
+                                    Email Address
+
+                                    <span>
+                                        *
+                                    </span>
+
+                                </label>
+
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="student@example.com"
+                                    autocomplete="email"
+                                    maxlength="150"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- ==================================================
+                                 PASSWORD
+                            ================================================== -->
+
+                            <div class="form-group">
+
+                                <label for="password">
+
+                                    Password
+
+                                    <span>
+                                        *
+                                    </span>
+
+                                </label>
+
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Create a password"
+                                    autocomplete="new-password"
+                                    minlength="6"
+                                    maxlength="255"
+                                    required
+                                >
+
+
+                                <small class="field-hint">
+                                    Minimum 6 characters.
+                                </small>
+
+                            </div>
+
+
+
+                            <!-- ==================================================
+                                 DATE OF BIRTH
+                            ================================================== -->
+
+                            <div class="form-group">
+
+                                <label for="dob">
+
+                                    Date of Birth
+
+                                    <span>
+                                        *
+                                    </span>
+
+                                </label>
+
+
+                                <input
+                                    type="date"
+                                    id="dob"
+                                    name="dob"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- ==================================================
+                                 DEPARTMENT
+                            ================================================== -->
+
+                            <div class="form-group">
+
+                                <label for="department">
+
+                                    Department
+
+                                    <span>
+                                        *
+                                    </span>
+
+                                </label>
+
+
+                                <select
+                                    id="department"
+                                    name="department"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select department
+                                    </option>
+
+                                    <option value="Computer Science and Engineering">
+                                        Computer Science and Engineering
+                                    </option>
+
+                                    <option value="Information Technology">
+                                        Information Technology
+                                    </option>
+
+                                    <option value="Electronics and Communication Engineering">
+                                        Electronics and Communication Engineering
+                                    </option>
+
+                                    <option value="Electrical and Electronics Engineering">
+                                        Electrical and Electronics Engineering
+                                    </option>
+
+                                    <option value="Mechanical Engineering">
+                                        Mechanical Engineering
+                                    </option>
+
+                                    <option value="Civil Engineering">
+                                        Civil Engineering
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
+                            <!-- ==================================================
+                                 ACADEMIC YEAR
+                            ================================================== -->
+
+                            <div class="form-group">
+
+                                <label for="year">
+
+                                    Academic Year
+
+                                    <span>
+                                        *
+                                    </span>
+
+                                </label>
+
+
+                                <select
+                                    id="year"
+                                    name="year"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select year
+                                    </option>
+
+                                    <option value="1">
+                                        1st Year
+                                    </option>
+
+                                    <option value="2">
+                                        2nd Year
+                                    </option>
+
+                                    <option value="3">
+                                        3rd Year
+                                    </option>
+
+                                    <option value="4">
+                                        4th Year
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
+                            <!-- ==================================================
+                                 PHONE
+                            ================================================== -->
+
+                            <div class="form-group">
+
+                                <label for="phone">
+
+                                    Phone Number
+
+                                    <span>
+                                        *
+                                    </span>
+
+                                </label>
+
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="10-digit mobile number"
+                                    maxlength="10"
+                                    inputmode="numeric"
+                                    autocomplete="tel"
+                                    pattern="[0-9]{10}"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ==================================================
+                             FORM FOOTER
+                        ================================================== -->
+
+                        <div class="form-footer">
+
+
+                            <!-- ==================================================
+                                 PRIVACY NOTE
+                            ================================================== -->
+
+                            <div class="privacy-note">
+
+                                <span
+                                    class="privacy-icon"
+                                    aria-hidden="true"
+                                >
+                                    🔒
+                                </span>
+
+
+                                <div>
+
+                                    <strong>
+                                        Database protected
+                                    </strong>
+
+                                    <small>
+
+                                        Your information is securely
+                                        stored in the MySQL database.
+
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- ==================================================
+                                 SUBMIT BUTTON
+                            ================================================== -->
+
+                            <button
+                                type="submit"
+                                id="submitBtn"
+                                class="submit-button"
+                            >
+
+                                <span>
+                                    Register Student
+                                </span>
+
+
+                                <span
+                                    class="button-arrow"
+                                    aria-hidden="true"
+                                >
+                                    →
+                                </span>
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+
+
+                    <!-- ==================================================
+                         STATUS MESSAGE
+                    ================================================== -->
+
+                    <div
+                        id="message"
+                        class="message"
+                        aria-live="polite"
+                        role="status"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================================
+             TECHNOLOGY SECTION
+        ========================================================= -->
+
+        <section
+            class="technology-section"
+            aria-label="Technology used"
+        >
+
+
+            <!-- MYSQL -->
+
+            <div class="technology-item">
+
+                <span
+                    class="technology-icon"
+                    aria-hidden="true"
+                >
+                    DB
+                </span>
+
+                <div>
+
+                    <strong>
+                        MySQL
+                    </strong>
+
+                    <small>
+                        Relational database
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NODE.JS -->
+
+            <div class="technology-item">
+
+                <span
+                    class="technology-icon"
+                    aria-hidden="true"
+                >
+                    JS
+                </span>
+
+                <div>
+
+                    <strong>
+                        Node.js
+                    </strong>
+
+                    <small>
+                        Backend runtime
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- EXPRESS -->
+
+            <div class="technology-item">
+
+                <span
+                    class="technology-icon"
+                    aria-hidden="true"
+                >
+                    API
+                </span>
+
+                <div>
+
+                    <strong>
+                        Express
+                    </strong>
+
+                    <small>
+                        REST API
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RESPONSIVE -->
+
+            <div class="technology-item">
+
+                <span
+                    class="technology-icon"
+                    aria-hidden="true"
+                >
+                    ✓
+                </span>
+
+                <div>
+
+                    <strong>
+                        Responsive
+                    </strong>
+
+                    <small>
+                        Desktop & mobile
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <span
+                    class="brand-logo small"
+                    aria-hidden="true"
+                >
+                    S
+                </span>
+
+                <strong>
+                    StudentHub
+                </strong>
+
+            </div>
+
+
+            <span>
+                Full Stack Development · Task 01
+            </span>
+
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ============================================================
+         JAVASCRIPT
+    ============================================================ -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

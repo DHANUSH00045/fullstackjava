@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ============================================================
+         BASIC DOCUMENT SETTINGS
+         ============================================================ -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="StudentHub Task 07 - Interactive Web Form with JavaScript Events, Functions and MySQL"
+    >
+
+    <title>
+        StudentHub | Task 07 - Interactive Feedback Form
+    </title>
+
+
+    <!-- ============================================================
+         GOOGLE FONT
+         ============================================================ -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ============================================================
+         STYLESHEET
+         ============================================================ -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ============================================================
+         NAVBAR
+         ============================================================ -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    S
+                </div>
+
+                <div>
+
+                    <h2>
+                        StudentHub
+                    </h2>
+
+                    <span>
+                        Full Stack Development
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="task-title">
+
+                Task 07 · Interactive Web Form
+
+            </div>
+
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ============================================================
+         MAIN CONTENT
+         ============================================================ -->
+
+    <main class="container">
+
+
+        <!-- ========================================================
+             PAGE HEADER
+             ======================================================== -->
+
+        <section class="page-header">
+
+            <span class="badge">
+                TASK 07 · JAVASCRIPT EVENTS
+            </span>
+
+            <h1>
+                Interactive Feedback Form
+            </h1>
+
+            <p>
+
+                Build an interactive customer feedback system using
+
+                <strong>
+                    JavaScript events, reusable functions,
+                    validation and MySQL database storage.
+                </strong>
+
+            </p>
+
+        </section>
+
+
+
+        <!-- ========================================================
+             STATISTICS
+             ======================================================== -->
+
+        <section class="stats-grid">
+
+
+            <!-- TOTAL FEEDBACK -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📝
+                </div>
+
+                <div>
+
+                    <p>
+                        TOTAL FEEDBACK
+                    </p>
+
+                    <h2 id="totalFeedback">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AVERAGE RATING -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon insert-icon">
+                    ⭐
+                </div>
+
+                <div>
+
+                    <p>
+                        AVERAGE RATING
+                    </p>
+
+                    <h2 id="averageRating">
+                        0.0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LIVE VALIDATION -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon update-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <p>
+                        LIVE VALIDATION
+                    </p>
+
+                    <h2>
+                        Active
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DATABASE -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon today-icon">
+                    🗄️
+                </div>
+
+                <div>
+
+                    <p>
+                        DATABASE
+                    </p>
+
+                    <h2>
+                        MySQL
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ========================================================
+             FEEDBACK FORM
+             ======================================================== -->
+
+        <section class="activity-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    CUSTOMER FEEDBACK
+                </span>
+
+                <h2>
+                    Share Your Experience
+                </h2>
+
+                <p>
+
+                    Complete the form below. Fields are validated
+                    while you type and the submit action uses a
+                    double-click event.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 FORM
+                 ================================================== -->
+
+            <form
+                id="feedbackForm"
+                class="feedback-form"
+                novalidate
+            >
+
+
+                <!-- ==================================================
+                     NAME
+                     ================================================== -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        maxlength="80"
+                    >
+
+                    <small
+                        id="nameMessage"
+                        class="field-message"
+                    ></small>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     EMAIL
+                     ================================================== -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="student@example.com"
+                        autocomplete="email"
+                        maxlength="120"
+                    >
+
+                    <small
+                        id="emailMessage"
+                        class="field-message"
+                    ></small>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     CATEGORY
+                     ================================================== -->
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Feedback Category
+                    </label>
+
+                    <select
+                        id="category"
+                        name="category"
+                    >
+
+                        <option value="">
+                            Select a category
+                        </option>
+
+                        <option value="Website">
+                            Website
+                        </option>
+
+                        <option value="Service">
+                            Service
+                        </option>
+
+                        <option value="Customer Support">
+                            Customer Support
+                        </option>
+
+                        <option value="Overall Experience">
+                            Overall Experience
+                        </option>
+
+                        <option value="Suggestion">
+                            Suggestion
+                        </option>
+
+                    </select>
+
+                    <small
+                        id="categoryMessage"
+                        class="field-message"
+                    ></small>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     RATING
+                     ================================================== -->
+
+                <div class="form-group">
+
+                    <label for="rating">
+                        Feedback Rating
+                    </label>
+
+                    <select
+                        id="rating"
+                        name="rating"
+                    >
+
+                        <option value="">
+                            Select your rating
+                        </option>
+
+                        <option value="5">
+                            5 — Excellent
+                        </option>
+
+                        <option value="4">
+                            4 — Very Good
+                        </option>
+
+                        <option value="3">
+                            3 — Good
+                        </option>
+
+                        <option value="2">
+                            2 — Needs Improvement
+                        </option>
+
+                        <option value="1">
+                            1 — Poor
+                        </option>
+
+                    </select>
+
+                    <small
+                        id="ratingMessage"
+                        class="field-message"
+                    ></small>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     FEEDBACK MESSAGE
+                     ================================================== -->
+
+                <div class="form-group">
+
+                    <label for="feedback">
+                        Your Feedback
+                    </label>
+
+                    <textarea
+                        id="feedback"
+                        name="feedback"
+                        rows="6"
+                        maxlength="250"
+                        placeholder="Tell us about your experience..."
+                    ></textarea>
+
+
+                    <div class="textarea-footer">
+
+                        <small
+                            id="feedbackMessage"
+                            class="field-message"
+                        ></small>
+
+                        <span id="characterCount">
+                            0 / 250
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     BUTTONS
+                     ================================================== -->
+
+                <div class="button-group">
+
+                    <button
+                        type="button"
+                        id="submitButton"
+                        class="insert-button"
+                    >
+                        ✓ Double-Click to Submit
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="resetButton"
+                        class="reset-button"
+                    >
+                        ↻ Reset Form
+                    </button>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     STATUS MESSAGE
+                     ================================================== -->
+
+                <div
+                    id="statusMessage"
+                    class="status-message hidden"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ========================================================
+             EVENT FLOW
+             ======================================================== -->
+
+        <section class="process-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    JAVASCRIPT EVENTS
+                </span>
+
+                <h2>
+                    How Interaction Works
+                </h2>
+
+                <p>
+
+                    The form combines browser events with reusable
+                    JavaScript functions and a Node.js API.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="process-grid">
+
+
+                <!-- EVENT 01 -->
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Keyboard Input
+                    </h3>
+
+                    <p>
+
+                        Input events validate the user's data
+                        while they type into the form.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- EVENT 02 -->
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Mouse Hover
+                    </h3>
+
+                    <p>
+
+                        Hovering over form fields highlights
+                        the active input area.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- EVENT 03 -->
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Double Click
+                    </h3>
+
+                    <p>
+
+                        Double-clicking the submit button
+                        starts the final validation process.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- EVENT 04 -->
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Reusable Functions
+                    </h3>
+
+                    <p>
+
+                        Common validation logic is handled
+                        through reusable JavaScript functions.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================================
+             VALIDATION RULES
+             ======================================================== -->
+
+        <section class="records-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    VALIDATION SYSTEM
+                </span>
+
+                <h2>
+                    Form Validation Rules
+                </h2>
+
+                <p>
+
+                    Every required field is checked before the
+                    feedback is stored in the MySQL database.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="validation-grid">
+
+
+                <!-- NAME -->
+
+                <div class="validation-card">
+
+                    <div class="validation-icon">
+                        👤
+                    </div>
+
+                    <h3>
+                        Full Name
+                    </h3>
+
+                    <p>
+                        Must contain at least 3 characters.
+                    </p>
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="validation-card">
+
+                    <div class="validation-icon">
+                        ✉️
+                    </div>
+
+                    <h3>
+                        Email Address
+                    </h3>
+
+                    <p>
+                        Must contain a valid email format.
+                    </p>
+
+                </div>
+
+
+
+                <!-- RATING -->
+
+                <div class="validation-card">
+
+                    <div class="validation-icon">
+                        ⭐
+                    </div>
+
+                    <h3>
+                        Rating
+                    </h3>
+
+                    <p>
+                        A rating from 1 to 5 must be selected.
+                    </p>
+
+                </div>
+
+
+
+                <!-- FEEDBACK -->
+
+                <div class="validation-card">
+
+                    <div class="validation-icon">
+                        💬
+                    </div>
+
+                    <h3>
+                        Feedback
+                    </h3>
+
+                    <p>
+
+                        Feedback must contain at least
+                        10 characters.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================================
+             STORED FEEDBACK
+             ======================================================== -->
+
+        <section class="records-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    MYSQL RECORDS
+                </span>
+
+                <h2>
+                    Recent Feedback
+                </h2>
+
+                <p>
+
+                    The latest feedback entries stored in the
+                    MySQL database through the Node.js API.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Rating
+                            </th>
+
+                            <th>
+                                Feedback
+                            </th>
+
+                            <th>
+                                Submitted
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="feedbackTable">
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="empty-state"
+                            >
+
+                                Loading feedback...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================================
+             CONFIRMATION
+             ======================================================== -->
+
+        <section
+            id="confirmationSection"
+            class="confirmation-section hidden"
+        >
+
+            <div class="confirmation-icon">
+                ✓
+            </div>
+
+            <h2>
+                Feedback Submitted Successfully
+            </h2>
+
+            <p>
+
+                Thank you for sharing your experience.
+                Your feedback has been stored in the MySQL database.
+
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+
+    <footer>
+
+        <p>
+
+            StudentHub • Task 07
+            <br>
+            Interactive Web Form with Events & Functions
+
+        </p>
+
+        <span>
+            HTML5 · CSS3 · JavaScript · Node.js · Express · MySQL
+        </span>
+
+    </footer>
+
+
+
+    <!-- ============================================================
+         TASK 07 JAVASCRIPT
+         ============================================================ -->
+
+    <script
+        src="script.js"
+    ></script>
+
+
+</body>
+
+</html>

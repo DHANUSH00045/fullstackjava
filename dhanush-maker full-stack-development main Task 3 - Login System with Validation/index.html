@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ============================================================
+         DOCUMENT SETUP
+    ============================================================ -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="StudentHub secure student login system using MySQL"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b0d12"
+    >
+
+    <title>
+        StudentHub | Login
+    </title>
+
+
+    <!-- ============================================================
+         GOOGLE FONT
+    ============================================================ -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ============================================================
+         STYLESHEET
+    ============================================================ -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ============================================================
+         MAIN PAGE
+    ============================================================ -->
+
+    <main class="page-container">
+
+
+        <!-- ========================================================
+             HEADER
+        ========================================================= -->
+
+        <header class="page-header">
+
+            <div>
+
+                <p class="eyebrow">
+
+                    FULL STACK DEVELOPMENT
+
+                    <span aria-hidden="true">
+                        •
+                    </span>
+
+                    TASK 03
+
+                </p>
+
+
+                <h1>
+                    Welcome Back
+                </h1>
+
+
+                <p class="subtitle">
+
+                    Sign in to access your StudentHub account.
+
+                </p>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ========================================================
+             LOGIN SECTION
+        ========================================================= -->
+
+        <section
+            class="login-section"
+            aria-labelledby="login-title"
+        >
+
+
+            <!-- ====================================================
+                 LOGIN CARD
+            ===================================================== -->
+
+            <div class="login-card">
+
+
+                <!-- ==================================================
+                     LOGIN ICON
+                =================================================== -->
+
+                <div
+                    class="login-icon"
+                    aria-hidden="true"
+                >
+                    🔐
+                </div>
+
+
+
+                <!-- ==================================================
+                     LOGIN HEADING
+                =================================================== -->
+
+                <div class="login-heading">
+
+                    <h2 id="login-title">
+                        Student Login
+                    </h2>
+
+
+                    <p>
+
+                        Enter your registered credentials
+                        to continue.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     LOGIN FORM
+                =================================================== -->
+
+                <form
+                    id="loginForm"
+                    novalidate
+                >
+
+
+                    <!-- ==============================================
+                         EMAIL
+                    =============================================== -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            maxlength="150"
+                            required
+                            aria-describedby="emailError"
+                        >
+
+
+                        <small
+                            class="field-error"
+                            id="emailError"
+                            aria-live="polite"
+                        ></small>
+
+                    </div>
+
+
+
+                    <!-- ==============================================
+                         PASSWORD
+                    =============================================== -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                minlength="6"
+                                required
+                                aria-describedby="passwordError"
+                            >
+
+
+                            <button
+                                type="button"
+                                id="togglePassword"
+                                class="toggle-password"
+                                aria-label="Show password"
+                            >
+
+                                Show
+
+                            </button>
+
+                        </div>
+
+
+                        <small
+                            class="field-error"
+                            id="passwordError"
+                            aria-live="polite"
+                        ></small>
+
+                    </div>
+
+
+
+                    <!-- ==============================================
+                         LOGIN MESSAGE
+                    =============================================== -->
+
+                    <div
+                        id="loginMessage"
+                        class="message"
+                        role="alert"
+                        aria-live="polite"
+                    ></div>
+
+
+
+                    <!-- ==============================================
+                         LOGIN BUTTON
+                    =============================================== -->
+
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="login-button"
+                    >
+
+                        <span id="buttonText">
+                            Login
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+
+                <!-- ==================================================
+                     SECURITY INFORMATION
+                =================================================== -->
+
+                <div class="login-info">
+
+
+                    <div
+                        class="info-icon"
+                        aria-hidden="true"
+                    >
+                        ✓
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Secure Login
+                        </strong>
+
+
+                        <p>
+
+                            Your credentials are verified
+                            securely through the StudentHub
+                            Node.js server and MySQL database.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================================
+             TECHNOLOGY INFORMATION
+        ========================================================= -->
+
+        <section
+            class="technology-info"
+            aria-label="Technology used"
+        >
+
+            <span>
+                Node.js
+            </span>
+
+            <span>
+                Express
+            </span>
+
+            <span>
+                MySQL
+            </span>
+
+            <span>
+                JavaScript
+            </span>
+
+        </section>
+
+
+
+        <!-- ========================================================
+             FOOTER
+        ========================================================= -->
+
+        <footer class="page-footer">
+
+            <p>
+
+                StudentHub
+
+                <span aria-hidden="true">
+                    •
+                </span>
+
+                Full Stack Development
+
+                <span aria-hidden="true">
+                    •
+                </span>
+
+                Task 03
+
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- ============================================================
+         APPLICATION JAVASCRIPT
+    ============================================================ -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
