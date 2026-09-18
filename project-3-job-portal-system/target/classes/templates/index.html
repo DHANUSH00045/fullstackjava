@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobPortal - Connect Students & Top Tech Employers</title>
+    <link rel="stylesheet" th:href="@{/css/jobportal.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div th:replace="fragments/layout :: navbar('home')"></div>
+
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <span class="badge-pill">🚀 VTU Campus & Industry Job Network</span>
+                <h1 class="hero-title">
+                    Launch Your Tech Career with <br><span class="gradient-text">Top Industry Employers</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Connect directly with leading technology companies, startups, and research labs. Upload your resume, apply with one click, and track your application status live.
+                </p>
+
+                <div>
+                    <a th:href="@{/jobs}" class="btn btn-primary">Browse All Openings</a>
+                    <a th:href="@{/register}" class="btn btn-secondary" style="margin-left: 0.75rem;">Create Free Account</a>
+                </div>
+            </section>
+
+            <!-- Featured Jobs Section -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 800;">Featured Tech Opportunities</h2>
+                <a th:href="@{/jobs}" style="color: var(--secondary); font-weight: 600; font-size: 0.9rem;">View All Jobs →</a>
+            </div>
+
+            <div class="jobs-grid">
+                <div class="job-card" th:each="job : ${jobs}">
+                    <div class="job-card-header">
+                        <span class="job-category-tag" th:text="${job.category}">Software Engineering</span>
+                        <span class="job-type-pill" th:text="${job.jobType}">Full-Time</span>
+                    </div>
+
+                    <h3 class="job-title" th:text="${job.title}">Full Stack Java Developer</h3>
+                    <p class="job-company" th:text="${job.companyName}">Google Cloud India</p>
+
+                    <div class="job-meta-row">
+                        <div>📍 <span th:text="${job.location}">Bengaluru</span></div>
+                        <div>💼 <span th:text="${job.experienceLevel}">Fresher</span></div>
+                        <div>👥 <span th:text="${job.getApplicantCount()} + ' Applied'">2 Applied</span></div>
+                    </div>
+
+                    <div class="job-skills-wrap">
+                        <span class="skill-chip" th:each="skill : ${#strings.arraySplit(job.skillsRequired, ',')}" th:text="${#strings.trim(skill)}">Java</span>
+                    </div>
+
+                    <div class="job-card-footer">
+                        <div class="job-salary" th:text="${job.salary}">₹14 - ₹18 LPA</div>
+                        <a th:href="@{'/jobs/' + ${job.id}}" class="btn btn-primary btn-sm">View & Apply →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div th:replace="fragments/layout :: footer"></div>
+
+    <script th:src="@{/js/jobportal.js}"></script>
+</body>
+</html>

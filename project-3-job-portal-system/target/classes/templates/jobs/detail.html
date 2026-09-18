@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${job.title} + ' - ' + ${job.companyName} + ' | JobPortal'">Job Details</title>
+    <link rel="stylesheet" th:href="@{/css/jobportal.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div th:replace="fragments/layout :: navbar('jobs')"></div>
+
+    <main class="main-content">
+        <div class="container">
+
+            <a th:href="@{/jobs}" style="display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text-secondary); margin-bottom: 1.5rem; font-weight: 600;">
+                ← Back to All Openings
+            </a>
+
+            <!-- Flash Error Message -->
+            <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+            <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: start;">
+                
+                <!-- Left: Full Job Specification -->
+                <div class="card-panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <span class="job-category-tag" th:text="${job.category}">Software Engineering</span>
+                        <span class="job-type-pill" th:text="${job.jobType}">Full-Time</span>
+                    </div>
+
+                    <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.35rem;" th:text="${job.title}">Job Title</h1>
+                    <p style="color: #a5b4fc; font-size: 1.1rem; font-weight: 600; margin-bottom: 1.5rem;" th:text="${job.companyName}">Company Name</p>
+
+                    <div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; border: 1px solid var(--border-color);">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <span class="stat-label">Location</span>
+                                <p style="font-weight: 600;" th:text="${job.location}">Bengaluru</p>
+                            </div>
+                            <div>
+                                <span class="stat-label">Salary Package</span>
+                                <p style="font-weight: 800; color: #34d399; font-size: 1.15rem;" th:text="${job.salary}">₹14 - ₹18 LPA</p>
+                            </div>
+                            <div>
+                                <span class="stat-label">Experience Required</span>
+                                <p style="font-weight: 600;" th:text="${job.experienceLevel}">Fresher</p>
+                            </div>
+                            <div>
+                                <span class="stat-label">Total Applicants</span>
+                                <p style="font-weight: 600;" th:text="${job.getApplicantCount()} + ' Candidates'">2 Candidates</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Required Skills</h3>
+                        <div class="job-skills-wrap">
+                            <span class="skill-chip" style="font-size: 0.85rem; padding: 0.3rem 0.75rem;" th:each="skill : ${#strings.arraySplit(job.skillsRequired, ',')}" th:text="${#strings.trim(skill)}">Java</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Job Description & Responsibilities</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.8; white-space: pre-line;" th:text="${job.description}">Detailed job description...</p>
+                    </div>
+                </div>
+
+                <!-- Right: Application Form Box -->
+                <div class="card-panel">
+                    <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.25rem;">Apply for this Position</h2>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">Submit your profile and resume to the hiring team.</p>
+
+                    <!-- Case 1: Not Logged In -->
+                    <div sec:authorize="!isAuthenticated()" style="text-align: center; padding: 2rem 1rem;">
+                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">You need to sign in or register to submit job applications.</p>
+                        <a th:href="@{/login}" class="btn btn-primary" style="width: 100%; margin-bottom: 0.75rem;">Sign In to Apply</a>
+                        <a th:href="@{/register}" class="btn btn-secondary" style="width: 100%;">Create New Account</a>
+                    </div>
+
+                    <!-- Case 2: Already Applied -->
+                    <div th:if="${alreadyApplied}" class="alert alert-success" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <strong>✓ Application Already Submitted</strong>
+                        <p style="font-size: 0.85rem;">You have already applied for this opening. You can monitor the review and shortlist status from your dashboard.</p>
+                        <a th:href="@{/my-applications}" class="btn btn-primary btn-sm">Track Application Status →</a>
+                    </div>
+
+                    <!-- Case 3: Logged In as Student and Not yet applied -->
+                    <div sec:authorize="hasRole('STUDENT')" th:if="${!alreadyApplied}">
+                        <form th:action="@{/jobs/apply}" th:object="${applicationDto}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" th:field="*{jobId}">
+
+                            <!-- Candidate Details Summary -->
+                            <div style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem; font-size: 0.85rem; border: 1px solid var(--border-color);">
+                                <strong>Applying As:</strong> <span th:text="${currentUser.fullName}">Student Name</span><br>
+                                <strong>Email:</strong> <span th:text="${currentUser.email}">student@campus.edu</span>
+                            </div>
+
+                            <!-- Cover Letter / Note -->
+                            <div class="form-group">
+                                <label class="form-label">Cover Letter / Note to Employer</label>
+                                <textarea th:field="*{coverLetter}" rows="4" placeholder="Highlight why you are an ideal fit for this role..." class="form-control"></textarea>
+                            </div>
+
+                            <!-- Resume Attachment -->
+                            <div class="form-group">
+                                <label class="form-label">Upload Resume (Optional if already uploaded in Profile)</label>
+                                <input type="file" th:field="*{resumeFile}" class="form-control" accept=".pdf,.doc,.docx,.txt">
+                                <span th:if="${currentUser.resumeFileName != null}" style="font-size: 0.75rem; color: #a5b4fc; display: block; margin-top: 0.35rem;">
+                                    ✓ Using profile resume: <strong th:text="${currentUser.resumeFileName}">Resume.pdf</strong>
+                                </span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                                Submit Application
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Case 4: Logged in as Employer / Admin -->
+                    <div sec:authorize="hasAnyRole('EMPLOYER', 'ADMIN')" style="text-align: center; padding: 2rem 1rem;">
+                        <p style="color: var(--text-secondary);">You are currently logged in with an Employer / Admin account.</p>
+                        <a th:href="@{/employer/dashboard}" class="btn btn-primary" style="margin-top: 1rem;">Go to Employer Dashboard</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <div th:replace="fragments/layout :: footer"></div>
+
+    <script th:src="@{/js/jobportal.js}"></script>
+</body>
+</html>

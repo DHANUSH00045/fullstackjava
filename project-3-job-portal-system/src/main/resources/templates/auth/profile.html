@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile & Resume - JobPortal</title>
+    <link rel="stylesheet" th:href="@{/css/jobportal.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div th:replace="fragments/layout :: navbar('profile')"></div>
+
+    <main class="main-content">
+        <div class="container" style="max-width: 800px;">
+
+            <div style="margin-bottom: 2rem;">
+                <h1 style="font-size: 2rem; font-weight: 800;">My Candidate Profile</h1>
+                <p style="color: var(--text-secondary);">Maintain your skills, bio, and resume to quickly apply for campus & industry openings.</p>
+            </div>
+
+            <!-- Flash Success Message -->
+            <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+            <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+            <div class="card-panel">
+                <form th:action="@{/profile/update}" th:object="${profileDto}" method="post" enctype="multipart/form-data">
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                        <!-- Full Name -->
+                        <div class="form-group">
+                            <label class="form-label">Full Name <span style="color: var(--danger)">*</span></label>
+                            <input type="text" th:field="*{fullName}" class="form-control">
+                            <p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" style="color: var(--danger); font-size: 0.8rem; margin-top: 0.25rem;"></p>
+                        </div>
+
+                        <!-- Email (Read-only) -->
+                        <div class="form-group">
+                            <label class="form-label">Registered Email</label>
+                            <input type="text" th:value="${user.email}" disabled class="form-control" style="opacity: 0.7;">
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                        <!-- College / Company -->
+                        <div class="form-group">
+                            <label class="form-label">College / Organization</label>
+                            <input type="text" th:field="*{companyOrCollege}" class="form-control">
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" th:field="*{phone}" class="form-control">
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="form-group">
+                        <label class="form-label">Technical Skills (Comma separated)</label>
+                        <input type="text" th:field="*{skills}" placeholder="e.g. Java, Spring Boot, React, Python, AWS" class="form-control">
+                    </div>
+
+                    <!-- Bio / Summary -->
+                    <div class="form-group">
+                        <label class="form-label">Professional Summary / Bio</label>
+                        <textarea th:field="*{bio}" rows="4" placeholder="Briefly describe your career objectives, projects, and strengths..." class="form-control"></textarea>
+                    </div>
+
+                    <!-- Resume Upload Section -->
+                    <div style="background: rgba(255,255,255,0.02); border: 1px dashed var(--border-color); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+                        <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Resume / CV Document</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1rem;">
+                            Upload your resume (PDF, DOCX, or TXT up to 10MB). This will be automatically attached when you apply for positions.
+                        </p>
+
+                        <div th:if="${user.resumeFileName != null}" style="display: flex; align-items: center; justify-content: space-between; background: rgba(79, 70, 229, 0.1); padding: 0.75rem 1rem; border-radius: var(--radius-sm); margin-bottom: 1rem; border: 1px solid rgba(79, 70, 229, 0.3);">
+                            <div>
+                                <span style="font-weight: 600; font-size: 0.9rem;" th:text="${user.resumeFileName}">Resume.pdf</span>
+                                <span style="font-size: 0.75rem; color: #a5b4fc; display: block;">Active Resume on File</span>
+                            </div>
+                            <a th:href="@{'/resume/download/' + ${user.id}}" class="btn btn-secondary btn-sm">Download Resume</a>
+                        </div>
+
+                        <input type="file" th:field="*{resumeFile}" class="form-control" accept=".pdf,.doc,.docx,.txt">
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button type="submit" class="btn btn-primary">Save Profile & Resume</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <div th:replace="fragments/layout :: footer"></div>
+
+</body>
+</html>

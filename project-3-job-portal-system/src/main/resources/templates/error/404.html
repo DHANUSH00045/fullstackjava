@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>404 - Job Not Found | JobPortal</title>
+    <link rel="stylesheet" th:href="@{/css/jobportal.css}">
+</head>
+<body>
+    <div th:replace="fragments/layout :: navbar('')"></div>
+    <main class="main-content" style="text-align: center; padding: 5rem 1rem;">
+        <div class="container" style="max-width: 500px;">
+            <h1 style="font-size: 5rem; font-weight: 800; color: #818cf8;">404</h1>
+            <h2 style="margin-bottom: 1rem;">Position Not Found</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;" th:text="${errorMessage != null ? errorMessage : 'The requested job opening or candidate profile could not be found.'}"></p>
+            <a th:href="@{/jobs}" class="btn btn-primary">Find Open Jobs</a>
+        </div>
+    </main>
+    <div th:replace="fragments/layout :: footer"></div>
+</body>
+</html>

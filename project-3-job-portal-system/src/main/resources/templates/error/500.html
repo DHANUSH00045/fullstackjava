@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>500 - Server Error | JobPortal</title>
+    <link rel="stylesheet" th:href="@{/css/jobportal.css}">
+</head>
+<body>
+    <div th:replace="fragments/layout :: navbar('')"></div>
+    <main class="main-content" style="text-align: center; padding: 5rem 1rem;">
+        <div class="container" style="max-width: 500px;">
+            <h1 style="font-size: 5rem; font-weight: 800; color: #f43f5e;">500</h1>
+            <h2 style="margin-bottom: 1rem;">Application Exception</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;" th:text="${errorMessage != null ? errorMessage : 'An internal processing error occurred while managing your request.'}"></p>
+            <a th:href="@{/}" class="btn btn-primary">Return to Homepage</a>
+        </div>
+    </main>
+    <div th:replace="fragments/layout :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications - JobPortal</title>
+    <link rel="stylesheet" th:href="@{/css/jobportal.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div th:replace="fragments/layout :: navbar('applications')"></div>
+
+    <main class="main-content">
+        <div class="container">
+
+            <div style="margin-bottom: 2rem;">
+                <h1 style="font-size: 2rem; font-weight: 800;">My Job Applications</h1>
+                <p style="color: var(--text-secondary);">Track real-time candidate review status, interview shortlists, and employer updates.</p>
+            </div>
+
+            <!-- Flash Messages -->
+            <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+
+            <!-- Applications List -->
+            <div th:if="${not #lists.isEmpty(applications)}" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                <div th:each="app : ${applications}" class="card-panel" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+                    
+                    <div style="flex: 1; min-width: 280px;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.35rem;">
+                            <span class="job-category-tag" th:text="${app.job.category}">Software</span>
+                            <span class="status-badge" 
+                                  th:classappend="${app.status == 'SHORTLISTED' ? 'shortlisted' : app.status == 'REJECTED' ? 'rejected' : 'pending'}"
+                                  th:text="${app.status}">
+                                SHORTLISTED
+                            </span>
+                        </div>
+
+                        <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.2rem;" th:text="${app.job.title}">Job Title</h2>
+                        <p style="color: #a5b4fc; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.75rem;" th:text="${app.job.companyName}">Google Cloud</p>
+
+                        <div style="display: flex; gap: 1.5rem; font-size: 0.825rem; color: var(--text-secondary);">
+                            <div>📍 <span th:text="${app.job.location}">Bengaluru</span></div>
+                            <div>💰 <span th:text="${app.job.salary}">₹14 - ₹18 LPA</span></div>
+                            <div>📅 Applied on <span th:text="${#temporals.format(app.appliedDate, 'dd MMM yyyy, hh:mm a')}">Date</span></div>
+                        </div>
+
+                        <div th:if="${app.status == 'SHORTLISTED'}" style="margin-top: 0.75rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); font-size: 0.825rem; color: #a7f3d0;">
+                            🎉 <strong>Congratulations!</strong> You have been shortlisted for next rounds by the hiring manager.
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end;">
+                        <a th:href="@{'/jobs/' + ${app.job.id}}" class="btn btn-secondary btn-sm">View Job Posting</a>
+                        <span th:if="${app.resumeFileName != null}" style="font-size: 0.75rem; color: var(--text-muted);">
+                            Resume: <strong th:text="${app.resumeFileName}">Resume.pdf</strong>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div th:if="${#lists.isEmpty(applications)}" class="card-panel" style="text-align: center; padding: 4rem 2rem;">
+                <h3>No Applications Submitted Yet</h3>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem;">Explore opening vacancies and start applying to launch your career.</p>
+                <a th:href="@{/jobs}" class="btn btn-primary" style="margin-top: 1.5rem;">Explore Job Openings</a>
+            </div>
+
+        </div>
+    </main>
+
+    <div th:replace="fragments/layout :: footer"></div>
+
+    <script th:src="@{/js/jobportal.js}"></script>
+</body>
+</html>

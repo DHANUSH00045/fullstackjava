@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Console - JobPortal</title>
+    <link rel="stylesheet" th:href="@{/css/jobportal.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div th:replace="fragments/layout :: navbar('admin')"></div>
+
+    <main class="main-content">
+        <div class="container">
+
+            <div style="margin-bottom: 2rem;">
+                <h1 style="font-size: 2rem; font-weight: 800;">Platform Administration Console</h1>
+                <p style="color: var(--text-secondary);">Manage registered students, employers, job vacancies, and platform telemetry.</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Registered Accounts</span>
+                    <span class="stat-value" th:text="${totalUsers}">3</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Active Job Openings</span>
+                    <span class="stat-value" style="color: #06b6d4;" th:text="${totalJobs}">4</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Total Applications Submitted</span>
+                    <span class="stat-value" style="color: #34d399;" th:text="${totalApplications}">2</span>
+                </div>
+            </div>
+
+            <!-- Users Management Table -->
+            <div class="card-panel" style="margin-bottom: 2rem;">
+                <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Platform Registered Users</h3>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>College / Company</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="u : ${users}">
+                                <td style="font-family: monospace; color: var(--text-muted);" th:text="'#' + ${u.id}">#1</td>
+                                <td style="font-weight: 600;" th:text="${u.fullName}">Aarav Sharma</td>
+                                <td th:text="${u.email}">aarav@campus.edu</td>
+                                <td>
+                                    <span class="status-badge" 
+                                          th:classappend="${u.role == 'ROLE_STUDENT' ? 'pending' : u.role == 'ROLE_EMPLOYER' ? 'shortlisted' : 'rejected'}"
+                                          th:text="${#strings.replace(u.role, 'ROLE_', '')}">
+                                        STUDENT
+                                    </span>
+                                </td>
+                                <td th:text="${u.companyOrCollege != null ? u.companyOrCollege : 'N/A'}">VTU</td>
+                                <td th:text="${u.phone != null ? u.phone : 'N/A'}">+91 9876543210</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Jobs Management Table -->
+            <div class="card-panel">
+                <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">All Published Jobs</h3>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Job Title</th>
+                                <th>Employer / Company</th>
+                                <th>Category</th>
+                                <th>Location</th>
+                                <th>Salary</th>
+                                <th>Posted Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="j : ${jobs}">
+                                <td style="font-weight: 600;" th:text="${j.title}">Java Dev</td>
+                                <td th:text="${j.companyName}">Google</td>
+                                <td th:text="${j.category}">Software</td>
+                                <td th:text="${j.location}">Bengaluru</td>
+                                <td style="color: #34d399; font-weight: 700;" th:text="${j.salary}">₹14 LPA</td>
+                                <td th:text="${#temporals.format(j.postedDate, 'dd MMM yyyy')}">15 Sep</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div th:replace="fragments/layout :: footer"></div>
+
+    <script th:src="@{/js/jobportal.js}"></script>
+</body>
+</html>

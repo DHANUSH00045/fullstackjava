@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - JobPortal</title>
+    <link rel="stylesheet" th:href="@{/css/jobportal.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div th:replace="fragments/layout :: navbar('auth')"></div>
+
+    <main class="main-content">
+        <div class="container" style="max-width: 520px;">
+
+            <div class="card-panel">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <span class="badge-pill">Join JobPortal</span>
+                    <h2 style="font-size: 1.75rem; font-weight: 800;">Create Your Account</h2>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">Register as a Student/Job Seeker or Employer</p>
+                </div>
+
+                <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+                <form th:action="@{/register}" th:object="${userDto}" method="post">
+                    
+                    <!-- Role Selection -->
+                    <div class="form-group">
+                        <label class="form-label">I want to register as a: <span style="color: var(--danger)">*</span></label>
+                        <select th:field="*{role}" class="form-control">
+                            <option value="STUDENT">Student / Job Seeker</option>
+                            <option value="EMPLOYER">Employer / Hiring Manager</option>
+                        </select>
+                    </div>
+
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label class="form-label">Full Name <span style="color: var(--danger)">*</span></label>
+                        <input type="text" th:field="*{fullName}" class="form-control" placeholder="e.g. Johnathan Doe">
+                        <p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" style="color: var(--danger); font-size: 0.8rem; margin-top: 0.25rem;"></p>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label class="form-label">Email Address <span style="color: var(--danger)">*</span></label>
+                        <input type="email" th:field="*{email}" class="form-control" placeholder="name@domain.com">
+                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: var(--danger); font-size: 0.8rem; margin-top: 0.25rem;"></p>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label class="form-label">Password <span style="color: var(--danger)">*</span></label>
+                        <input type="password" th:field="*{password}" class="form-control" placeholder="At least 6 characters">
+                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: var(--danger); font-size: 0.8rem; margin-top: 0.25rem;"></p>
+                    </div>
+
+                    <!-- College / Company -->
+                    <div class="form-group">
+                        <label class="form-label">College / Company Name</label>
+                        <input type="text" th:field="*{companyOrCollege}" class="form-control" placeholder="e.g. VTU Engineering / Tech Corp">
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" th:field="*{phone}" class="form-control" placeholder="+91 9876543210">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                        Complete Registration
+                    </button>
+                </form>
+
+                <p style="text-align: center; font-size: 0.85rem; color: var(--text-secondary); margin-top: 1.5rem;">
+                    Already have an account? <a th:href="@{/login}" style="color: var(--secondary); font-weight: 600;">Sign in here</a>
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <div th:replace="fragments/layout :: footer"></div>
+
+</body>
+</html>
